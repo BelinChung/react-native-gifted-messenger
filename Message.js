@@ -80,13 +80,15 @@ export default class Message extends Component {
       }
 
       if (diffMessage === null || (diffMessage !== null && (rowData.name !== diffMessage.name || rowData.uniqueId !== diffMessage.uniqueId))) {
+        let rowDataMirror = {...rowData}
+        delete rowDataMirror.position
         if (typeof onImagePress === 'function') {
           return (
             <TouchableHighlight
               underlayColor='transparent'
               onPress={() => onImagePress(rowData)}
             >
-              <ImageView {...rowData}
+              <ImageView {...rowDataMirror}
                 source={rowData.image}
                 style={[styles.imagePosition, styles.image, (rowData.position === 'left' ? styles.imageLeft : styles.imageRight)]}
               />
@@ -94,7 +96,7 @@ export default class Message extends Component {
           );
         }
         return (
-          <ImageView {...rowData}
+          <ImageView {...rowDataMirror}
             source={rowData.image}
             style={[styles.imagePosition, styles.image, (rowData.position === 'left' ? styles.imageLeft : styles.imageRight)]}
           />
