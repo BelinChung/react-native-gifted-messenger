@@ -10,10 +10,10 @@ import {
   Animated,
   Platform,
   PixelRatio,
+  ActivityIndicator
 } from 'react-native';
 
 import Message from './Message';
-import GiftedSpinner from 'react-native-gifted-spinner';
 import moment from 'moment';
 import {setLocale} from './Locale';
 import deepEqual from 'deep-equal';
@@ -395,7 +395,11 @@ class GiftedMessenger extends Component {
       if (this.props.isLoadingEarlierMessages) {
         return (
           <View style={this.styles.loadEarlierMessages}>
-            <GiftedSpinner />
+             <ActivityIndicator
+                animating={true}
+                size={this.props.spinnerSize}
+                color={this.props.spinnerColor}
+              />
           </View>
         );
       }
@@ -503,6 +507,9 @@ class GiftedMessenger extends Component {
           handleEmailPress={this.props.handleEmailPress}
 
           styles={this.styles}
+
+          spinnerSize={this.props.spinnerSize}
+          spinnerColor={this.props.spinnerColor}
         />
       </View>
     );
@@ -643,6 +650,8 @@ GiftedMessenger.defaultProps = {
   submitOnReturn: false,
   text: '',
   typingMessage: '',
+  spinnerSize: 'small',
+  spinnerColor: 'gray',
 };
 
 GiftedMessenger.propTypes = {
@@ -683,6 +692,8 @@ GiftedMessenger.propTypes = {
   styles: React.PropTypes.object,
   submitOnReturn: React.PropTypes.bool,
   typingMessage: React.PropTypes.string,
+  spinnerSize: React.PropTypes.string,
+  spinnerColor: React.PropTypes.string,
 };
 
 
